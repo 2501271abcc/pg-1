@@ -112,7 +112,7 @@ function renderRecords() {
 			var ok = confirm("この記録を削除しますか？");
 			if (!ok) return;
 
-			deleteRecord(index);
+			deleteRecord(originalIndex);
 		});
 
 		// liに追加（横並びにしたいので span と button を入れる）
