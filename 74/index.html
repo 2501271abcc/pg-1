@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- スマホ幅にも対応 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ペット散歩ログ</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<!-- スタイルシートをリンク -->
+	<script src="./js/script.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header class="site-header">
+		<h1 class="site-title">ペット散歩ログ</h1>
+	</header>
+
+	<main class="container">
+		<section class="card">
+			<h2 class="section-title">記録入力</h2>
+			<!-- データが消えることを防ぐためフォームを送信しない -->
+			<form id="recordForm" class="form-grid" onsubmit="return false;">
+				<label class="form-label" for="petSelect">ペット</label>
+				<select id="petName" class="form-control">
+					<option value="">選択してください</option>
+					<option value="犬">犬</option>
+					<option value="猫">猫</option>
+					<option value="人">人</option>
+				</select>
+
+
+				<label class="form-label" for="WalkingDistance">散歩距離 (m)</label>
+				<input type="number" id="walkingDistance" class="form-control" min="0" step="100" placeholder="例：1200">
+
+				<label class="form-label" for="walkingTime">散歩時間 (分)</label>
+				<input type="number" id="walkingTime" class="form-control" min="0" step="1" placeholder="例：15">
+
+				<label class="form-label" for="memo">メモ（任意）</label>
+				<input type="text" id="memo" class="form-control" placeholder="例：公園を1周。雨上がりで少し滑りやすい">
+			</form>
+
+			<div class="actions">
+				<button type="button" id="addition" class="btn primary" onclick="recordAdd()">追加</button>
+				<!-- 入力クリアを付けたい時はここにもう1個ボタンを -->
+			</div>
+		</section>
+	</main>
+</body>
+
+</html>
