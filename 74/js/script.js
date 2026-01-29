@@ -70,7 +70,8 @@ function renderRecords() {
 	let ul = document.createElement("ul");
 
 	//配列の順番を逆にする（最後が先頭）
-	records.reverse();
+	records = records.slice().reverse();
+
 	records.forEach(function (record, index) {
 		let li = document.createElement("li");
 		//条件演算子?を使用。空文字でないかチェック
@@ -102,6 +103,8 @@ function renderRecords() {
 		delBtn.textContent = "削除";
 		delBtn.className = "btn danger";
 
+		//表示を逆順にしているためここも逆にする
+		let originalIndex = (records.length - 1) - index;
 
 		// クリックしたらこのindexを消す
 		delBtn.addEventListener("click", function () {
@@ -139,21 +142,20 @@ window.addEventListener("storage", function (e) {
 
 //削除用関数
 
-function deleteRecord(index) {
+
+function deleteRecord(originalIndex) {
 	// いまの記録配列を取得
 	let records = JSON.parse(localStorage.getItem("Data") || "[]");
 
-	// index が範囲外なら何もしない
-	if (index < 0 || index >= records.length) return;
+	// 範囲外なら何もしない
+	if (originalIndex < 0 || originalIndex >= records.length) return;
 
 	// 1件削除
-	records.splice(index, 1);
+	records.splice(originalIndex, 1);
 
 	// 保存し直し
 	localStorage.setItem("Data", JSON.stringify(records));
 
-	// 一覧を更新（renderRecordsがある場合）
-	if (typeof renderRecords === "function") {
-		renderRecords();
-	}
+	// 一覧を再描画
+	renderRecords();
 }
